@@ -1,5 +1,5 @@
 const express = require('express')
-const { validationResult,check } = require('express-validator')
+const { validationResult, check } = require('express-validator')
 const router = express.Router()
 const User = require('../../model/User')
 const bcrypt = require('bcrypt')
@@ -42,7 +42,8 @@ router.post('/', [
         }
 
         const token = createToken(user._id)
-        res.status(200).json({ user: user._id, token })
+        res.cookie('jwt', token, { httpOnly: true, maxAge:60*60*60*3*1000*24})
+        return res.status(200).json({ user: user._id, token })
     } catch (err) {
         console.log(err);
         res.status(500).send("Server Error")
