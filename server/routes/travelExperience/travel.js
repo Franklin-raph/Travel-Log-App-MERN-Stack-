@@ -94,14 +94,20 @@ router.put('/edit/:travel_id', requireAuth, checkUser, async (req, res) =>{
 
         if(loggedInUserId === userExpId){
 
-            const { location, cost, heritage, places, communityAccess } = req.body
+            travel.findById({ _id: req.params.travel_id })
+                .then(result => {
+                    result.location = req.body.location;
+                    result.cost = req.body.cost;
+                    result.heritage = req.body.heritage;
+                    result.places = req.body.places;
+                    result.communityAccess = req.body.communityAccess;
 
-            const updatedTavelExp = { location, cost, heritage, places, communityAccess }
-            // await travel.findByIdAndUpdate({  _id: req.params.travel_id })
-            res.send("{ updatedTavelExp }")
-            console.log(updatedTavelExp)
+                    result.save()
+                    res.json({ result })
+                })
+
         }else{
-            return res.status(403).send("You are not authorized to delete this post")
+            return res.status(403).send("You are not authorized to Edit this post")
         }
         
     } catch (err) {
