@@ -42,7 +42,7 @@ router.post('/', [
         }
 
         const token = createToken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge:60*60*60*3*1000*24})
+        res.cookie('jwt', token, { httpOnly: true, maxAge:60 * 60 * 3 * 1000 * 24})
         return res.status(200).json({ user: user._id, token })
     } catch (err) {
         console.log(err);

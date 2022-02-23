@@ -14,7 +14,7 @@ const requireAuth = (req, res, next) => {
                 console.log(err.message);
             }else{
                 console.log("Token is available");
-                console.log(decodedToken);
+                // console.log(decodedToken);
                 next();
             }
         })
@@ -35,7 +35,7 @@ const checkUser = (req, res, next) => {
                 console.log(err.message);
                 res.locals.user = null
             }else{
-                console.log(decodedToken);
+                // console.log(decodedToken);
                 let user = await User.findById(decodedToken.id);
                 res.locals.user = user
                 next()
