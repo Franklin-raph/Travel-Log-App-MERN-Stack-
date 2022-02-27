@@ -31,7 +31,3 @@ app.use('/travel/exps', travelRoutes)
 app.get('/', (req, res) => {
     res.send("Home Page")
 })
-
-// app.get('/places', requireAuth, (req, res) => {
-//     res.send("This is places route")
-// })
