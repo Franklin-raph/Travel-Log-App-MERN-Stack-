@@ -26,6 +26,6 @@ const TravelSchema = mongoose.Schema({
     communityAccess: {
         type: String
     }
-})
+},{timestamps: true})
 
 module.exports = mongoose.model('travel', TravelSchema)
