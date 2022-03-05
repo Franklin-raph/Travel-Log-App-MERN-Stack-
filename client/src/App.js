@@ -1,18 +1,21 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SignIn from './components/SignIn';
-import Navbar from './components/Navbar';
+import axios from 'axios'
 
 function App() {
+
+  const fetchInfo = () => {
+    console.log("Hello")
+    axios.get('/travel/exps/allexp')
+      .then(res => {
+        console.log(res)
+      })
+  } 
+
   return (
-    <div>
-      <BrowserRouter>
-      <Navbar />
-        <Routes>
-          <Route path='/signin' element={<SignIn/>}/>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      <button onClick={ fetchInfo }>Fetch data</button>
+      <div className="btn btn-secondary">Hello</div>
+    </>
   );
 }
 

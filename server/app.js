@@ -7,6 +7,7 @@ const signOutRoutes = require('./routes/auth/signOut')
 const travelRoutes = require('./routes/travelExperience/travel')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/auth')
+const cors = require('cors')
 
 const app = express()
 
@@ -20,6 +21,11 @@ app.listen(port, ()=> {
 })
 
 // middle-wares
+// app.use(cors({
+//     origin: 'http://127.0.0.1:3006'
+//     })
+// );
+
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
