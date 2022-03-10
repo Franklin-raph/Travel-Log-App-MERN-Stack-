@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root{
+    --primary-color: rgb(0, 33, 65);
+    --secondary-color: rgb(204, 204, 204);
+    --yellow-color: #ffa200;
+    --white-color: rgb(255, 255, 255);
+    --black-color: #000000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+    font-size: 18px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.footer{
+    position: fixed; 
+    bottom: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.nav__brand, .nav__link {
+  color: var(--white-color)
+}
+
+.nav__brand:hover {
+    color: var(--secondary-color);
   }
+
+a{
+    text-decoration: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav__link:hover{
+    color: var(--secondary-color);
+}
+
+.nav {
+  padding: 0 10rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 8vh;
+  background: var(--primary-color)
+}
+
+.nav__menu {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 2rem;
+  margin-top: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+.nav__toggler {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav__toggler div {
+  width: 2.5rem;
+  height: 0.2rem;
+  margin: 0.4rem;
+  background: rgb(204, 204, 204);
+  transition: 0.3s ease-in;
+}
+
+.formWidth{
+    width: 25rem;
+}
+
+@media screen and (max-width: 768px) {
+
+    .formWidth{
+        width: 20rem;
+    }
+
+    .nav{
+        padding: 0 15px;
+    }
+
+    .nav__menu {
+        margin-top: 0px;
+    }
+
+  .nav__toggler {
+    display: block;
+    cursor: pointer;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .nav__menu {
+    position: fixed;
+    top: 7vh;
+    right: 0;
+    height: 93vh;
+    width: 50vw;
+    background: rgb(0, 33, 65);
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: 0.5s ease-in;
+    z-index: 1;
   }
+}
+/* Active Class */
+.nav__active {
+  transform: translate(0%);
+}
+
+/* Toggle Icon Animation */
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-9px, 9px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-3px, -4px);
 }
