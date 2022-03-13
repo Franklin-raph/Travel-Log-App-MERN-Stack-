@@ -8,7 +8,7 @@ const travel = require('../../model/Travel')
 // Get all users travel experiences
 router.get('/allexp', async (req, res) => {
     try {
-        const allTravelExp = await travel.find()
+        const allTravelExp = await travel.find().populate('user', ['name'])
         res.json(allTravelExp)
     } catch (err) {
         console.log(err)

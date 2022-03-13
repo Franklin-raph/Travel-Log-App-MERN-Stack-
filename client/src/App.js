@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard';
+import TravelExperiences from './pages/TravelExperiences';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/signin' element={ <Signin /> } />
         <Route path='/Signup' element={ <Signup /> } />
         <Route path='/dashboard' element={ <Dashboard /> } />
+        <Route path='/travels' element={ <TravelExperiences /> } />
       </Routes>
       <Footer />
     </Router>
