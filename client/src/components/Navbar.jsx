@@ -40,7 +40,7 @@ function Navbar() {
       <ul className={ active }>
         { presentToken ?
           <li className="nav__item">
-          <Link to="#" onClick={ handleLogout } id="nav__link">
+          <Link to="/" onClick={ handleLogout } id="nav__link">
             Sign Out
           </Link>
         </li>

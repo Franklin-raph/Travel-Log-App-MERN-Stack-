@@ -5,30 +5,43 @@ import axios from 'axios'
 const Home = () => {
 
   const historyRoute = useNavigate()
+  const [error, setError] = useState("")
 
   const getTravels = async () => {
-  try {
-    const res = await axios.get('/travel/exps/allexp')
-    historyRoute(`/travels`)
-    console.log(res.data)
-  } catch (error) {
-    console.log(error)
-  }
+    try {
+      const res = await axios.get('/travel/exps/allexp')
+      historyRoute(`/travels`)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
     
   }
+
+  const addExp = () => {
+    const localStorageItem = localStorage.getItem("jwt")
+    if(localStorageItem) {
+      historyRoute(`/addtravel`)
+    } else {
+      historyRoute(`/`)
+      setError("Please signin in order to add a travel experience")
+    }
+
+  }
+
   return (
     <>
         {/* <!-- ======= Hero Section ======= --> */}
   <section id="hero" className="d-flex justify-cntent-center align-items-center">
     <div id="heroCarousel" className="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
       {/* <!-- Slide 1 --> */}
       <div className="carousel-item active">
         <div className="carousel-container">
+          <p className='bg-danger'>{error}</p>
           <h2 className="animate__animated animate__fadeInDown">Share your travel experiences</h2>
           {/* <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p> */}
-          <button className="btn-get-started animate__animated animate__fadeInUp" onClick={ getTravels } style={{background: 'transparent'}}>View people's tarvel Experience</button>
-          <Link to="" className="btn-get-started animate__animated animate__fadeInUp">Add tarvel Experience</Link>
+          <button className="btn-get-started animate__animated animate__fadeInUp" onClick={ getTravels } >View people's tarvel Experience</button>
+          <button className="btn-get-started animate__animated animate__fadeInUp" onClick={ addExp } >Add tarvel Experience</button>
         </div>
       </div>
 

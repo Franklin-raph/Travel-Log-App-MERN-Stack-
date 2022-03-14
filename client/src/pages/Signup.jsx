@@ -1,7 +1,6 @@
 import React,{ useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-// import { useCookies } from 'react-cookie';
 
 const Signup = () => {
 
@@ -9,23 +8,38 @@ const Signup = () => {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [password1, setPassword1] = useState("")
+    const [error, setError] = useState("")
+
+    const [loading, setLoading] = useState(false)
 
     const historyRoute = useNavigate()
 
     const handleSignup = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
-        if(password !== password1){
-            console.log("Error")
-        }else{
+        setTimeout(() => {
+            setLoading(false)
+        },5000)
+
+        if(email === "" && name === "" && password === "" && password1 === ""){
+            setError("Please fill up all fields")
+        }else if (password !== password1){
+            setError("Passwords do not match")
+        }else if(password.length < 6){
+            setError("Password length should be at least 6 characters long")
+        }else {
+            setLoading(true)
             try {
                 const body = {name, email, password}
                 const res = await axios.post('/auth/signup', body)
+                console.log(res)
                 const data = await res.data
                 localStorage.setItem('jwt', JSON.stringify(data))
                 console.log(data)
                 historyRoute(`/dashboard`)
             } catch (error) {
+                setError("Email or Username already exists")
                 console.log(error)
             }
         }
@@ -36,13 +50,14 @@ const Signup = () => {
     <div className="container formWidth" style={{marginTop:'3rem'}}>
         <div className="card card-body">
             <div className="text-center">
-                <h3>Login</h3>
+                <h3>Sign Up</h3>
                 <i className="fas fa-user-circle" style={{fontSize: '3rem'}}></i>
+                <p className='bg-danger text-light mt-2'>{error}</p>
             </div>
         <form  onSubmit={ handleSignup }>
             <div className="form-group">
                 
-                <label className="mt-3">Name</label>
+                <label className="mt-3">Username</label>
                 <input type="text" 
                     placeholder="test@test.com" 
                     className="form-control" 
@@ -77,9 +92,16 @@ const Signup = () => {
                     required 
                     onChange={e => setPassword1(e.target.value)}
                     />
-                    
-                    <input type="submit" value="Login" className="form-control btn-dark mt-3"/>
-                    {/* <button type="submit" onClick={ () => { dispatch(login(email,password)) } } className="formControl btn-dark mt-3">Login</button> */}
+                    <button type="submit" className="form-control mt-3" id='loginBtn' onClick={ handleSignup } disabled={loading}>
+                            {loading && (
+                                <span 
+                                className='spinner-border spinner-border-sm'
+                                role='status'
+                                aria-hidden='true'
+                                />
+                            )}
+                            Login
+                        </button>
             </div>
         </form>
         </div>

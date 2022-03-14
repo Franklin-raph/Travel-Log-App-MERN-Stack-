@@ -9,6 +9,8 @@ const Signin = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
 
+    const [error, setError] = useState("")
+
     const historyRoute = useNavigate()
 
     
@@ -16,6 +18,14 @@ const Signin = () => {
     const handleLogin = async (e) => {
         e.preventDefault()
         setLoading(true)
+
+        setTimeout(() => {
+            setLoading(false)
+        },5000)
+
+        if(email === "" && password === ""){
+            setError("Please fill in all fields")
+        }
 
         try {
             const body = {email, password}
@@ -25,6 +35,7 @@ const Signin = () => {
             console.log(data)
             historyRoute(`/dashboard`)
         } catch (error) {
+            setError("Incorrect Credentials")
             console.log(error)
         }
         
@@ -32,48 +43,47 @@ const Signin = () => {
 
   return (
     <>
-    <div className="container formWidth" style={{marginTop: '3rem'}}>
-        <div className="card card-body">
-            <div className="text-center">
-                <h3>Login</h3>
-                <i className="fas fa-user-circle" style={{fontSize: '3rem'}}></i>
+        <div className="container formWidth" style={{marginTop: '3rem'}}>
+            <div className="card card-body">
+                <div className="text-center">
+                    <h3>Login</h3>
+                    <i className="fas fa-user-circle" style={{fontSize: '3rem'}}></i>
+                    <p className='bg-danger text-light'>{error}</p>
+                </div>
+            <form  onSubmit={handleLogin}>
+                <div className="form-group">
+                    
+                    <label className="mt-3">Email</label>
+                    <input type="email" 
+                        placeholder="test@test.com" 
+                        className="form-control" 
+                        name="email" 
+                        required
+                        onChange={e => setEmail(e.target.value)}
+                        />
+        
+                    <label className="mt-3">Password</label>
+                    <input type="password"
+                        placeholder="****"
+                        className="form-control"
+                        name="password"
+                        required
+                        onChange={e => setPassword(e.target.value)}
+                        />
+                        <button type="submit" id='loginBtn' className="form-control mt-3" onClick={ handleLogin } disabled={loading}>
+                            {loading && (
+                                <span 
+                                className='spinner-border spinner-border-sm'
+                                role='status'
+                                aria-hidden='true'
+                                />
+                            )}
+                            Login
+                        </button>
+                </div>
+            </form>
             </div>
-        <form  onSubmit={handleLogin}>
-            <div className="form-group">
-                
-                <label className="mt-3">Email</label>
-                <input type="email" 
-                    placeholder="test@test.com" 
-                    className="form-control" 
-                    name="email" 
-                    required 
-                    onChange={e => setEmail(e.target.value)}
-                    />
-    
-                <label className="mt-3">Password</label>
-                <input type="password" 
-                    placeholder="****" 
-                    className="form-control" 
-                    name="password"  
-                    required 
-                    onChange={e => setPassword(e.target.value)}
-                    />
-                    <button type="submit" className="form-control btn-dark mt-3" onClick={ handleLogin } disabled={loading}>
-                        {loading && (
-                            <span 
-                            className='spinner-border spinner-border-sm'
-                            role='status'
-                            aria-hidden='true'
-                            />
-                        )}
-                        Login
-                    </button>
-                    {/* { loading ? "" : <ReactBootstrap.Spinner animation="border" />  } */}
-                    {/* <input  onClick={() => setLoading(true)}/> */}
-            </div>
-        </form>
         </div>
-    </div>
     </>
   )
 }

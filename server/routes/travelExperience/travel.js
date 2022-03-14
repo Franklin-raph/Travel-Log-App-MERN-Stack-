@@ -8,7 +8,7 @@ const travel = require('../../model/Travel')
 // Get all users travel experiences
 router.get('/allexp', async (req, res) => {
     try {
-        const allTravelExp = await travel.find().populate('user', ['name'])
+        const allTravelExp = await travel.find().sort({ createdAt: -1 }).populate('user', ['name'])
         res.json(allTravelExp)
     } catch (err) {
         console.log(err)
@@ -79,7 +79,7 @@ router.delete('/deleteTravel/:travel_id', requireAuth, checkUser, async (req, re
 
 
 // Delete a travel experience
-// Route 'http://127.0.0.1:9000/travel/exps/deleteTravel/:travel_id'
+// Route 'http://127.0.0.1:9000/travel/exps/edit/:travel_id'
 router.put('/edit/:travel_id', requireAuth, checkUser, async (req, res) =>{
     try {
         // the logged in user id

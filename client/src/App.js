@@ -8,16 +8,17 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard';
 import TravelExperiences from './pages/TravelExperiences';
+import Post_travel from './pages/Post_travel';
 
 function App() {
 
-  const fetchInfo = () => {
-    console.log("Hello")
-    axios.get('/travel/exps/allexp')
-      .then(res => {
-        console.log(res)
-      })
-  } 
+  // const fetchInfo = () => {
+  //   console.log("Hello")
+  //   axios.get('/travel/exps/allexp')
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  // } 
 
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
         <Route path='/Signup' element={ <Signup /> } />
         <Route path='/dashboard' element={ <Dashboard /> } />
         <Route path='/travels' element={ <TravelExperiences /> } />
+        <Route path='/addtravel' element={ <Post_travel /> } />
       </Routes>
       <Footer />
     </Router>
