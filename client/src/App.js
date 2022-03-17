@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard';
 import TravelExperiences from './pages/TravelExperiences';
 import Post_travel from './pages/Post_travel';
+import ImageUpload from './components/ImageUpload';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/dashboard' element={ <Dashboard /> } />
         <Route path='/travels' element={ <TravelExperiences /> } />
         <Route path='/addtravel' element={ <Post_travel /> } />
+        <Route path='/imgupload' element={ <ImageUpload /> } />
       </Routes>
       <Footer />
     </Router>

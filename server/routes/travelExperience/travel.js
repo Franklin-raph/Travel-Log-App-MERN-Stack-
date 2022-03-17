@@ -17,6 +17,16 @@ router.get('/allexp', async (req, res) => {
 })
 
 
+router.post('/imagepost', (req, res)=> {
+    try {
+        // const fileStr = req.body;
+        console.log("fileStr");
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 // Add a travel experience
 router.post('/add', requireAuth, checkUser, async (req, res) => {
     let user = res.locals.user
@@ -49,6 +59,7 @@ router.get('/userTravel/:travel_id', async (req, res) => {
         res.status(500).send("Internal server error")
     }
 })
+
 
 // Delete a travel experience
 // Route 'http://127.0.0.1:9000/travel/exps/deleteTravel/:travel_id'

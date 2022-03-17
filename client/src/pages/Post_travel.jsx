@@ -9,15 +9,24 @@ const Post_travel = () => {
     const [communityAccess, setCommunity] = useState("")
     const [cost, setCost] = useState("")
 
+    const [error, setError] = useState("")
+
     const [loading, setLoading] = useState(false)
 
     const submitTravel = async (e) => {
         e.preventDefault()
-        const body = { location, places, heritage, communityAccess, cost }
-        const res = await axios.post('/travel/exps/add', body)
-        console.log(res)
-    }
+        try{
+            if(location === "" && places === "" && heritage === "" && communityAccess === "" && cost === ""){
+                setError("Please fill up all fields")
+            }else{
+                const body = { location, places, heritage, communityAccess, cost }
+                await axios.post('/travel/exps/add', body)
+            }
 
+        }catch(error){
+            console.log(error)
+        }
+    }
 
   return (
     <>

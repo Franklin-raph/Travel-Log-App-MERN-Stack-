@@ -21,7 +21,7 @@ const Signin = () => {
 
         setTimeout(() => {
             setLoading(false)
-        },5000)
+        },7000)
 
         if(email === "" && password === ""){
             setError("Please fill in all fields")
